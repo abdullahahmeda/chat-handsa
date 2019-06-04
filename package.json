@@ -4,7 +4,7 @@
   "description": "A chat app for prep. students of the faculty of engineering, Alexandria university",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "author": "'Abdullah Ahmed' abdullah.ahmed.a2000@gmail.com",
   "license": "ISC",
