@@ -7,7 +7,7 @@ const express       = require('express'),
         resave: true,
         saveUninitialized: false
       }),
-      sharedSession = require('express-socket.io-session')
+      sharedSession = require('express-socket.io-session');
       
 
 const app = express();
@@ -41,7 +41,6 @@ app.use('/', appRouter);
 const Message = require('./models/Message'),
     User    = require('./models/User'),
     Chat    = require('./models/Chat');
-
 
 io.on('connection', (socket) => {
     socket.on('new message', ({msg, chatId}) => {

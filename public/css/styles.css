@@ -97,6 +97,10 @@ h1, h2, h3, h4, h5, h6 {
   padding-bottom: var(--s-size);
 }
 
+.chats {
+  margin-top: 2rem;
+}
+
 .chat-box-container {
   justify-content: space-between;
   flex-wrap: wrap;
