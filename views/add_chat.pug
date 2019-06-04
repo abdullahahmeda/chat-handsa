@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+html(lang="ar")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    title اعمل شات جديدة
+    include partials/css
+  body
+    .container
+      form.add-chat.flex(method="POST")
+        input.input-field(type="text" placeholder="اسم الشات" name="chat_name")
+        input.input-field(type="password" placeholder="باسورد الشات. سيبها فاضية لو عايزها من غير باسورد" name="chat_password")
+        if errorText
+            p.form-error= errorText
+        button.btn اعمل الشات
+
+    include partials/js

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    title= chat.name
+    include partials/css
+  body
+    .container
+      .chat-info
+        h4= chat.name
+        p فيها #{chat.users.length} من الاشخاص
+        p فيها #{chat.messages.length} من الرسائل
+      if hasAccess && hasAccess == true
+        ul.chat-messages.flex
+          each message in messages
+            if message.sender._id == session.user
+              .chat-messages__message-wrapper.flex
+                li.chat-messages__message= message.body
+                p.chat-messages__info تم الارسال منذ #{Math.ceil((Date.now() - message.sentAt) / (1000 * 60))} دقيقة بواسطة #{message.sender.name}
+            else
+              .chat-messages__message-wrapper.chat-messages__message-wrapper--other.flex
+                li.chat-messages__message= message.body
+                p.chat-messages__info تم الارسال منذ #{Math.ceil((Date.now() - message.sentAt) / (1000 * 60))} دقيقة بواسطة #{message.sender.name}
+        form.chat-message-box.flex
+          input(type="text" placeholder="اكتب رسالة").input-field.chat-message-box__field
+          button.btn#chat-message-box__button(type="submit") ارسل
+      else
+        button.btn.join-caht-btn اشترك في الشات
+
+    include partials/js

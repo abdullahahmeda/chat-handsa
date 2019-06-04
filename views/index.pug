@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+html(lang="ar")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    title شات هندسة ❤️
+    include partials/css
+  body
+    .container
+      if session.name && session.name.length > 0
+        .search.flex
+          input.input-field(type="text" id="search__field" placeholder="ابحث عن غرفة")
+          button.btn(id="search__button") ابحث
+        .greeting
+          h3 ازيك يا #{session.name}
+        a.btn(href="chats/add") اعمل شات جديدة
+        .chats
+          h2 الشات بتاعتك
+          if chats && chats.length > 0
+            .chat-box-container.flex
+              each chat in chats
+                .chat-box
+                  a.chat-box__name(href="/chats/" + chat._id)= chat.name
+                  p.chat-box__users فيها #{chat.users.length} من الاشخاص
+          else
+            p انت مش موجود في أي شات حالياً
+      else
+        form.login(method="POST")
+          .login-wrapper.flex
+            input.login__field.input-field(type="text" name="uniId" placeholder="رقمك الجامعي")
+            button.btn.login__button(type="submit") الدخول
+          if errorText
+            p.form-error= errorText
+
+    include partials/js
+      
+    
