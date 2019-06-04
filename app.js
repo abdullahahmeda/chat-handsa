@@ -32,7 +32,7 @@ app.use((req, res, next) => {
   next();
 })
 
-const DBConnectionURL = 'mongodb://localhost:27017/chat-handsa-db'
+const DBConnectionURL = 'mongodb://elmagicabdulah:2962000a@ds231537.mlab.com:31537/chat-handsa-db'
 
 mongoose.connect(DBConnectionURL, {useNewUrlParser: true})
 
@@ -41,6 +41,7 @@ app.use('/', appRouter);
 const Message = require('./models/Message'),
     User    = require('./models/User'),
     Chat    = require('./models/Chat');
+
 
 io.on('connection', (socket) => {
     socket.on('new message', ({msg, chatId}) => {
