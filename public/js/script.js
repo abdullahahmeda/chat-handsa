@@ -37,6 +37,9 @@ if(sendButton) {
         chatMessageWrapper.appendChild(liMessage);
         chatMessageWrapper.appendChild(pMessage);
         chatMessages.appendChild(chatMessageWrapper)
+        let MessagesLength = +document.querySelector('.messages-length').textContent;
+        MessagesLength += 1;
+        document.querySelector('.messages-length').textContent = MessagesLength;
       chatField.value = '';
       return false;
     }
@@ -57,13 +60,20 @@ socket.on('new message',({msg, sender}) => {
         chatMessageWrapper.appendChild(liMessage);
         chatMessageWrapper.appendChild(pMessage);
         chatMessages.appendChild(chatMessageWrapper)
+        let MessagesLength = +document.querySelector('.messages-length').textContent;
+        MessagesLength += 1;
+        document.querySelector('.messages-length').textContent = MessagesLength;
 })
 
 
 var joinChatButton = document.querySelector('.join-caht-btn');
 if(joinChatButton) {
   joinChatButton.addEventListener('click', () => {
-    socket.emit('new user', window.location.pathname.substr(7))
+    socket.emit('new user', window.location.pathname.substr(7));
+    let UsersLength = +document.querySelector('.users-length').textContent;
+    UsersLength += 1;
+        document.querySelector('.messages-length').textContent = UsersLength;
+    window.location.reload();
   })
 }
 
@@ -72,5 +82,4 @@ socket.on('new user success', (name) => {
   newUser.classList.add('chat-messages__new-user');
   newUser.textContent = 'انضم ' + name + ' للشات';
   chatMessages.appendChild(newUser);
-  window.location.reload();
 })
