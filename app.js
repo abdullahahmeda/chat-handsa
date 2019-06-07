@@ -61,18 +61,21 @@ io.on('connection', (socket) => {
             })
         }
     })
-
-    socket.on('new user', (chatId) => {
-        Chat.find({users: socket.handshake.session.user}).then(user => {
-            if(user.length == 0) { // User does not exist in this chat
-                Chat.updateOne({_id: chatId}, {$push: {users: socket.handshake.session.user}}).then(() => {
-                    User.update({_id: socket.handshake.session.user}, { $push: {chats: chatId}}).then(() => {
-                        io.emit('new user success', socket.handshake.session.name);
-                    }).catch(() => {
+    socket.on('new user', ({chatId, password}) => {
+        Chat.find({ $and: [{_id: chatId}, {users: socket.handshake.session.user}]}).then(chat => {
+            if(chat.length == 0) { // User does not exist in this chat
+                Chat.find({ $and: [{_id: chatId}, {password}]}).then((chat) => {
+                    if(chat.length > 0) {
+                        Chat.updateOne({_id: chatId}, {$push: {users: socket.handshake.session.user}}).then(() => {
+                            User.updateOne({_id: socket.handshake.session.user}, { $push: {chats: chatId}}).then(() => {
+                                io.emit('new user success', socket.handshake.session.name);
+                            }).catch(() => {
+                                io.emit('new user fail');
+                            })
+                        })
+                    } else {
                         io.emit('new user fail');
-                    })
-                }).catch(() => {
-                    io.emit('new user fail');
+                    }
                 })
             }
         })

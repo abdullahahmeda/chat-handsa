@@ -37,9 +37,9 @@ if(sendButton) {
         chatMessageWrapper.appendChild(liMessage);
         chatMessageWrapper.appendChild(pMessage);
         chatMessages.appendChild(chatMessageWrapper)
-        let MessagesLength = +document.querySelector('.messages-length').textContent;
+        let MessagesLength = +document.querySelector('#messages-span').textContent;
         MessagesLength += 1;
-        document.querySelector('.messages-length').textContent = MessagesLength;
+        document.querySelector('#messages-span').textContent = MessagesLength;
       chatField.value = '';
       return false;
     }
@@ -60,20 +60,20 @@ socket.on('new message',({msg, sender}) => {
         chatMessageWrapper.appendChild(liMessage);
         chatMessageWrapper.appendChild(pMessage);
         chatMessages.appendChild(chatMessageWrapper)
-        let MessagesLength = +document.querySelector('.messages-length').textContent;
+        let MessagesLength = +document.querySelector('#messages-span').textContent;
         MessagesLength += 1;
-        document.querySelector('.messages-length').textContent = MessagesLength;
+        document.querySelector('#messages-span').textContent = MessagesLength;
 })
 
 
-var joinChatButton = document.querySelector('.join-caht-btn');
+var joinChatButton = document.querySelector('.join-chat-btn');
 if(joinChatButton) {
   joinChatButton.addEventListener('click', () => {
-    socket.emit('new user', window.location.pathname.substr(7));
-    let UsersLength = +document.querySelector('.users-length').textContent;
-    UsersLength += 1;
-        document.querySelector('.messages-length').textContent = UsersLength;
-    window.location.reload();
+    socket.emit('new user', {
+      chatId: window.location.pathname.substr(7), 
+      password: document.querySelector('.join-chat-field').value
+    });
+    return false;
   })
 }
 
@@ -82,4 +82,13 @@ socket.on('new user success', (name) => {
   newUser.classList.add('chat-messages__new-user');
   newUser.textContent = 'انضم ' + name + ' للشات';
   chatMessages.appendChild(newUser);
+  let UsersLength = +document.querySelector('#users-span').textContent;
+    UsersLength += 1;
+    document.querySelector('#users-span').textContent = UsersLength;
+});
+
+socket.on('new user fail', () => {
+  if(document.querySelector('.join-chat-error')) {
+    document.querySelector('.join-chat-error').style.display = "block";
+  }
 })

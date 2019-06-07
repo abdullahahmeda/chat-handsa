@@ -4,8 +4,6 @@ const User    = require('../models/User'),
       Chat    = require('../models/Chat'),
       Message = require('../models/Message');
 
-const io = require('../app');
-
 exports.index__get = (req, res) => {
   if(req.session.name && req.session.name.length > 0) {
     User.find({_id: req.session.user}).then(user => {
@@ -71,9 +69,7 @@ exports.add_chat__post = (req, res) => {
       
       
     } else {
-      return res.render('add_chat', {
-        errorText: 'من فضلك اكتب اسم الشات'
-      })
+      return res.render('add_chat')
     }
     
   } else {
@@ -102,8 +98,6 @@ exports.chat__get = (req, res) => {
             hasAccess: false
           })
         }
-        
-        
       } else {
         return res.redirect(302, '/404');
       }

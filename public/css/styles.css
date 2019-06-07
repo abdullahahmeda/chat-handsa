@@ -131,6 +131,17 @@ h1, h2, h3, h4, h5, h6 {
   font-size: .9rem
 }
 
+.join-chat-form {
+  flex-direction: column;
+}
+
+.join-chat-error {
+  display: none;
+}
+
+.join-chat-btn {
+  margin-top: var(--s-size);
+}
 
 .chat-info {
   background: var(--brown);

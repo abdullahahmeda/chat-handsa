@@ -10,8 +10,8 @@ html(lang="en")
     .container
       .chat-info
         h4= chat.name
-        p فيها #{chat.users.length} من الاشخاص
-        p فيها #{chat.messages.length} من الرسائل
+        p.users-length فيها <span id="users-span">#{chat.users.length}</span> من الاشخاص
+        p.messages-length فيها <span id="messages-span">#{chat.messages.length}</span> من الرسائل
       if hasAccess && hasAccess == true
         ul.chat-messages.flex
           each message in messages
@@ -27,6 +27,9 @@ html(lang="en")
           input(type="text" placeholder="اكتب رسالة").input-field.chat-message-box__field
           button.btn#chat-message-box__button(type="submit") ارسل
       else
-        button.btn.join-caht-btn اشترك في الشات
+        .flex.join-chat-form
+          input.input-field.join-chat-field(type="password" placeholder="باسورد الشات. سيبها فاضية لو الشات من غير باسورد")
+          p.join-chat-error الباسورد ده غلط. حاول تاني
+          button.btn.join-chat-btn اشترك في الشات
 
     include partials/js
