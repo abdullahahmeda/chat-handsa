@@ -79,6 +79,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: var(--s-size)
 }
 
+.greeting {
+  margin-bottom: 2rem;
+}
+
 .add-chat {
   flex-direction: column;
   margin-top: var(--s-size);
@@ -200,4 +204,17 @@ h1, h2, h3, h4, h5, h6 {
   padding: var(--s-size);
   color: #fff;
   margin: var(--l-size) auto;
+}
+
+
+@media (max-width: 767px) {
+  .login-wrapper {
+    flex-direction: column;
+  }
+
+  .login__field {
+    margin-bottom: var(--s-size);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
 }
