@@ -78,13 +78,17 @@ if(joinChatButton) {
 }
 
 socket.on('new user success', (name) => {
-  var newUser = document.createElement('li');
-  newUser.classList.add('chat-messages__new-user');
-  newUser.textContent = 'انضم ' + name + ' للشات';
-  chatMessages.appendChild(newUser);
-  let UsersLength = +document.querySelector('#users-span').textContent;
+  if(joinChatButton) {
+    window.location.reload();
+  } else {
+    var newUser = document.createElement('li');
+    newUser.classList.add('chat-messages__new-user');
+    newUser.textContent = 'انضم ' + name + ' للشات';
+    chatMessages.appendChild(newUser);
+    let UsersLength = +document.querySelector('#users-span').textContent;
     UsersLength += 1;
     document.querySelector('#users-span').textContent = UsersLength;
+  }
 });
 
 socket.on('new user fail', () => {

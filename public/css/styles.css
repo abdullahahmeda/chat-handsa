@@ -193,3 +193,11 @@ h1, h2, h3, h4, h5, h6 {
 .chat-message-box {
   padding-bottom: var(--l-size)
 }
+
+.chat-messages__new-user {
+  display: block;
+  background: var(--brown);
+  padding: var(--s-size);
+  color: #fff;
+  margin: var(--l-size) auto;
+}

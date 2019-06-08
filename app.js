@@ -69,12 +69,10 @@ io.on('connection', (socket) => {
                         Chat.updateOne({_id: chatId}, {$push: {users: socket.handshake.session.user}}).then(() => {
                             User.updateOne({_id: socket.handshake.session.user}, { $push: {chats: chatId}}).then(() => {
                                 io.emit('new user success', socket.handshake.session.name);
-                            }).catch(() => {
-                                io.emit('new user fail');
                             })
                         })
                     } else {
-                        io.emit('new user fail');
+                        return io.emit('new user fail');
                     }
                 })
             }
