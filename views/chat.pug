@@ -24,12 +24,14 @@ html(lang="en")
                 li.chat-messages__message= message.body
                 p.chat-messages__info تم الارسال منذ #{Math.ceil((Date.now() - message.sentAt) / (1000 * 60))} دقيقة بواسطة #{message.sender.name}
         form.chat-message-box.flex
-          input(type="text" placeholder="اكتب رسالة").input-field.chat-message-box__field
+          textarea(type="text" placeholder="اكتب رسالة").input-field.chat-message-box__field
           button.btn#chat-message-box__button(type="submit") ارسل
       else
         .flex.join-chat-form
           input.input-field.join-chat-field(type="password" placeholder="باسورد الشات" title="سيبها فاضية لو الشات من غير باسورد")
           p.join-chat-error الباسورد ده غلط. حاول تاني
           button.btn.join-chat-btn اشترك في الشات
+    
+    include partials/footer
 
     include partials/js

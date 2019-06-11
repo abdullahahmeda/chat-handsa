@@ -4,13 +4,26 @@ var chatField       = document.querySelector('.chat-message-box__field'),
     chatMessages    = document.querySelector('.chat-messages');
 
 
+twemoji.parse(document.body)
+
 if(sendButton) {
+  for(let i = 0; i < chatMessages.childNodes.length; i++) {
+    if(chatMessages.childNodes[i].classList.contains('chat-messages__message-wrapper')) {
+      var x = /[A-Za-z]+/; // is ascii
+      var isAscii = x.test(chatMessages.childNodes[i].childNodes[0].textContent[0]);
+      if(isAscii) {
+        chatMessages.childNodes[i].childNodes[0].style.direction = "ltr";
+        chatMessages.childNodes[i].childNodes[0].style.textAlign = "left";
+      } else {
+        chatMessages.childNodes[i].childNodes[0].style.direction = "rtl";
+        chatMessages.childNodes[i].childNodes[0].style.textAlign = "right";
+      }
+    }
+  }
   chatField.onkeyup = function() {
     if(chatField.value.length > 0) {
-        var x =  new RegExp("[\x00-\x80]+"); // is ascii
-
-        var isAscii = x.test(chatField.value);
-
+        var x = /[A-Za-z]+/; // is ascii
+        var isAscii = x.test(chatField.value[0]);
         if(isAscii) {
           chatField.style.direction = "ltr"
         } else {
@@ -33,6 +46,7 @@ if(sendButton) {
         liMessage.classList.add('chat-messages__message');
         pMessage.classList.add('chat-messages__info');
         liMessage.textContent = chatField.value;
+        twemoji.parse(liMessage);
         pMessage.textContent = 'تم الارسال الآن بواسطتك';
         chatMessageWrapper.appendChild(liMessage);
         chatMessageWrapper.appendChild(pMessage);
@@ -56,6 +70,7 @@ socket.on('new message',({msg, sender}) => {
         liMessage.classList.add('chat-messages__message');
         pMessage.classList.add('chat-messages__info');
         liMessage.textContent = msg;
+        twemoji.parse(liMessage);
         pMessage.textContent = 'تم الارسال الآن بواسطة ' + sender;
         chatMessageWrapper.appendChild(liMessage);
         chatMessageWrapper.appendChild(pMessage);
