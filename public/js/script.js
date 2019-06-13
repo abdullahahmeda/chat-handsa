@@ -3,6 +3,13 @@ var chatField       = document.querySelector('.chat-message-box__field'),
     sendButton      = document.getElementById('chat-message-box__button'),
     chatMessages    = document.querySelector('.chat-messages');
 
+    const emojies = {
+      smileys: `😀 😁 😂 🤣 😃 😄 😅 😆 😉 😊 😋 😎 😍 😘 🥰 😗 😙 😚 ☺️ 🙂 🤗 🤩 🤔 🤨 😐 😑 😶 🙄 😏 😣 😥 😮 🤐 😯 😪 😫 😴 😌 😛 😜 😝 🤤 😒 😓 😔 😕 🙃 🤑 😲 ☹️ 🙁 😖 😞 😟 😤 😢 😭 😦 😧 😨 😩 🤯 😬 😰 😱 🥵 🥶 😳 🤪 😵 😡 😠 🤬 😷 🤒 🤕 🤢 🤮 🤧 😇 🤠 🤡 🥳 🥴 🥺 🤥 🤫 🤭 🧐 🤓 😈 👿 👹 👺 💀 👻 👽 🤖 💩 😺 😸 😹 😻 😼 😽 🙀 😿 😾`.split(' ')
+    }
+    
+/* for(let i =0; i < emojies.length; i++) {
+  
+} */
 
 twemoji.parse(document.body)
 

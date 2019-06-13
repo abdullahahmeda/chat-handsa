@@ -13,5 +13,7 @@ const chatSchema = new mongoose.Schema({
   }
 })
 
+chatSchema.index({ name: 'text'});
+
 const Chat = mongoose.model('chat', chatSchema);
 module.exports = Chat;

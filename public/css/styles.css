@@ -191,7 +191,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #chat-message-box__button {
+  margin-top: var(--s-size);
   max-height: 60px;
+  flex-basis: 100%;
+}
+
+.emojies-btn {
+  margin-right: var(--l-size);
+  margin-left: var(--l-size);
+  background: var(--green);
+  border-color: transparent;
+  cursor: pointer;
+  padding-right: var(--m-size);
+  padding-left: var(--m-size);
 }
 
 .chat-messages__info {
@@ -200,7 +212,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .chat-message-box {
-  padding-bottom: var(--l-size)
+  padding-bottom: var(--l-size);
+  flex-wrap: wrap;
 }
 
 .chat-messages__new-user {

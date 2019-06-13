@@ -9,7 +9,7 @@ html(lang="ar")
   body
     .container
       form.add-chat.flex(method="POST")
-        input.input-field(type="text" placeholder="اسم الشات" name="chat_name")
+        input.input-field(type="text" placeholder="اسم الشات (حروف انجليزية فقط)" name="chat_name")
         input.input-field(type="password" placeholder="باسورد الشات (اختياري)" name="chat_password")
         if errorText
             p.form-error= errorText

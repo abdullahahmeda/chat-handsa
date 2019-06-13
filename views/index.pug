@@ -9,8 +9,8 @@ html(lang="ar")
   body
     .container
       if session.name && session.name.length > 0
-        .search.flex
-          input.input-field(type="text" id="search__field" placeholder="ابحث عن غرفة")
+        form(method="get" action="/search").search.flex
+          input.input-field(type="text" id="search__field" name="query" placeholder="ابحث عن غرفة")
           button.btn(id="search__button") ابحث
         .greeting
           h3 ازيك يا #{session.name}

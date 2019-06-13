@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    title البحث
+    include partials/css
+  body
+    .container
+      .chats
+        .chat-box-container.flex
+          if chats && chats.length > 0
+            each chat in chats
+              .chat-box
+                a.chat-box__name(href="/chats/" + chat._id)= chat.name
+                p.chat-box__users فيها #{chat.users.length} من الاشخاص
+          else
+            h4 تعذر البحث
+            p عذراً، ولكننا لم نتمكن من ايجاد طلبك. يمكنك العودة <a href="/">للصفحة الرئيسية</a>
+
+      
+    include partials/footer
+
+    include partials/js

@@ -10,6 +10,8 @@ router.post('/chats/add', AppController.add_chat__post);
 
 router.get('/chats/:id', AppController.chat__get);
 
+router.get('/search', AppController.search__get);
+
 router.get('/404', AppController.not_found__get);
 router.get('*', AppController.not_found__get);
 

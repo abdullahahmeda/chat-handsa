@@ -4,6 +4,8 @@ const User    = require('../models/User'),
       Chat    = require('../models/Chat'),
       Message = require('../models/Message');
 
+const englishRegex = /^[A-Za-z0-9 ]*$/;
+
 exports.index__get = (req, res) => {
   if(req.session.name && req.session.name.length > 0) {
     User.find({_id: req.session.user}).then(user => {
@@ -56,7 +58,7 @@ exports.add_chat__post = (req, res) => {
     const chatName     = validator.escape(req.body.chat_name),
           chatPassword = validator.escape(req.body.chat_password);
 
-    if(chatName != '') {
+    if(englishRegex.test(chatName) && chatName != '') {
       Chat.create({
         name: chatName,
         password: chatPassword,
@@ -67,9 +69,10 @@ exports.add_chat__post = (req, res) => {
         });
       })
       
-      
     } else {
-      return res.render('add_chat')
+      return res.render('add_chat', {
+        errorText: 'من فضلك ادخل اسم الشات حروف انجليزية فقط'
+      })
     }
     
   } else {
@@ -107,6 +110,30 @@ exports.chat__get = (req, res) => {
   } else {
     return res.redirect(302, '/')
   }
+}
+
+exports.search__get = (req, res) => {
+  if(req.session.name && req.session.name.length > 0) {
+    const query = validator.trim(validator.escape(req.query.query));
+    if(query.length > 0) {
+      Chat.find({ $text: {$search: query}}).then(chats => {
+        if(chats.length > 0) {
+          return res.render('search', {
+            chats
+          })
+        } else {
+          return res.render('search', {
+            chats: undefined
+          })
+        }
+      })
+    } else {
+      return res.redirect(302, '/')
+    }
+  } else {
+    return res.redirect(302, '/')
+  }
+  
 }
 
 

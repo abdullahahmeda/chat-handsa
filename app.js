@@ -35,6 +35,7 @@ app.use((req, res, next) => {
 const DBConnectionURL = 'mongodb://elmagicabdulah:2962000a@ds231537.mlab.com:31537/chat-handsa-db'
 
 mongoose.connect(DBConnectionURL, {useNewUrlParser: true})
+mongoose.set('useCreateIndex', true);
 
 app.use('/', appRouter);
 
