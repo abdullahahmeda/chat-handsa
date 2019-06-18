@@ -106,7 +106,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .chat {
-  position: relative;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }
 
@@ -173,7 +174,6 @@ h1, h2, h3, h4, h5, h6 {
   padding: var(--s-size);
   list-style: none;
   border-radius: 10px;
-  flex-basis: 100%;
   overflow-wrap: break-word;
   max-width: 100%;
 }
@@ -257,9 +257,8 @@ h1, h2, h3, h4, h5, h6 {
 .chat-message-box {
   padding-bottom: var(--l-size);
   flex-wrap: wrap;
-  position: absolute;
-  width: 100%;
-  bottom: 0;
+  position: relative;
+  margin-top: auto;
 }
 
 .chat-messages__new-user {
