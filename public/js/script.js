@@ -4,16 +4,38 @@ var chatField       = document.querySelector('.chat-message-box__field'),
     chatMessages    = document.querySelector('.chat-messages');
 
     const emojies = {
-      smileys: `😀 😁 😂 🤣 😃 😄 😅 😆 😉 😊 😋 😎 😍 😘 🥰 😗 😙 😚 ☺️ 🙂 🤗 🤩 🤔 🤨 😐 😑 😶 🙄 😏 😣 😥 😮 🤐 😯 😪 😫 😴 😌 😛 😜 😝 🤤 😒 😓 😔 😕 🙃 🤑 😲 ☹️ 🙁 😖 😞 😟 😤 😢 😭 😦 😧 😨 😩 🤯 😬 😰 😱 🥵 🥶 😳 🤪 😵 😡 😠 🤬 😷 🤒 🤕 🤢 🤮 🤧 😇 🤠 🤡 🥳 🥴 🥺 🤥 🤫 🤭 🧐 🤓 😈 👿 👹 👺 💀 👻 👽 🤖 💩 😺 😸 😹 😻 😼 😽 🙀 😿 😾`.split(' ')
+      smileys: `😀 😃 😄 😁 😆 😅 🤣 😂 🙂 🙃 😉 😊 😇 🥰 😍 🤩 😘 😗 ☺ 😚 😙 😋 😛 😜 🤪 😝 🤑 🤗 🤭 🤫 🤔 🤐 🤨 😐 😑 😶 😏 😒 🙄 😬 🤥 😌 😔 😪 🤤 😴 🤒 🤕 🤢 🤮 🤧 🥵 🥶 🥴 😵 🤯 🤠 🥳 😕 😟 🙁 ☹ 😮 😯 😲 😳 🥺 😦 😧 😨 😰 😥 😢 😭 😱 😖 😣 😞 😓 😩 😫 🥱 😤 😡 😠 🤬 😈 👿 💀 ☠ 💩 🤡 👹 👺 👻 👽 👾 🤖 😺 😸 😹 😻 😼 😽 🙀 😿 😾 💋 💌 💘 💝 💖 💗 💓 💞 💕 💟 ❣ 💔 ❤ 🧡 💛 💚 💙 💜 🤎 🖤 🤍 💯 💢 💥 💫 💦 💨 🕳 💣 💬 👁️‍🗨️ 🗨 🗯 💭 💤`.split(' ')
     }
-    
-/* for(let i =0; i < emojies.length; i++) {
   
-} */
 
-twemoji.parse(document.body)
+twemoji.parse(document.body);
+
 
 if(sendButton) {
+
+  for(key in emojies) {
+    if(emojies.hasOwnProperty(key)) {
+      emojies[key].forEach((emoji) => {
+        if(twemoji.parse(emoji) != emoji)
+        document.getElementById(key).innerHTML += twemoji.parse(emoji) + " "
+      })
+    }
+  }
+
+  for(let i = 0; i < document.querySelectorAll('.category > .emoji').length; i++) {
+    document.querySelectorAll('.category > .emoji')[i].addEventListener('click', () => {
+      chatField.value += document.querySelectorAll('.category > .emoji')[i].getAttribute('alt');
+    })
+  }
+
+  document.querySelector('.emojies-btn').addEventListener('click', () => {
+    if(document.querySelector('.emojies').classList.contains('open')) {
+      document.querySelector('.emojies').classList.remove('open')
+    } else {
+      document.querySelector('.emojies').classList.add('open')
+    }
+  })
+
   for(let i = 0; i < chatMessages.childNodes.length; i++) {
     if(chatMessages.childNodes[i].classList.contains('chat-messages__message-wrapper')) {
       var x = /[A-Za-z]+/; // is ascii

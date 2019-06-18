@@ -8,37 +8,37 @@ html(lang="en")
     include partials/css
   body
     .container
-      .chat-info
-        h4= chat.name
-        p.users-length فيها <span id="users-span">#{chat.users.length}</span> من الاشخاص
-        p.messages-length فيها <span id="messages-span">#{chat.messages.length}</span> من الرسائل
-      if hasAccess && hasAccess == true
-        ul.chat-messages.flex
-          each message in messages
-            if message.sender._id == session.user
-              .chat-messages__message-wrapper.flex
-                li.chat-messages__message= message.body
-                p.chat-messages__info تم الارسال منذ #{Math.ceil((Date.now() - message.sentAt) / (1000 * 60))} دقيقة بواسطة #{message.sender.name}
-            else
-              .chat-messages__message-wrapper.chat-messages__message-wrapper--other.flex
-                li.chat-messages__message= message.body
-                p.chat-messages__info تم الارسال منذ #{Math.ceil((Date.now() - message.sentAt) / (1000 * 60))} دقيقة بواسطة #{message.sender.name}
-        form.chat-message-box.flex
-          textarea(type="text" placeholder="اكتب رسالة").input-field.chat-message-box__field
-          button.emojies-btn 😀
-          .emojies
-            //- 
-              var emojies = {
-                smileys: `😀 😁 😂 😃 😄 😅 😆 😉 😊 😋 😎 😍 😘 🥰 😗 😙 😚 ☺️ 🙂 🤗 🤩 🤔 🤨 😐 😑 😶 🙄 😏 😣 😥 😮 🤐 😯 😪 😫 😴 😌 😛 😜 😝 🤤 😒 😓 😔 😕 🙃 🤑 😲 ☹️ 🙁 😖 😞 😟 😤 😢 😭 😦 😧 😨 😩 🤯 😬 😰 😱 🥵 🥶 😳 🤪 😵 😡 😠 🤬 😷 🤒 🤕 🤢 🤮 🤧 😇 🤠 🤡 🥳 🥴 🥺 🤥 🤫 🤭 🧐 🤓 😈 👿 👹 👺 💀 👻 👽 🤖 💩 😺 😸 😹 😻 😼 😽 🙀 😿 😾`.split(' ')
-              }
+      .chat
+        .chat-info
+          h4= chat.name
+          p.users-length فيها <span id="users-span">#{chat.users.length}</span> من الاشخاص
+          p.messages-length فيها <span id="messages-span">#{chat.messages.length}</span> من الرسائل
+        if hasAccess && hasAccess == true
+          ul.chat-messages.flex
+            each message in messages
+              if message.sender._id == session.user
+                .chat-messages__message-wrapper.flex
+                  li.chat-messages__message= message.body
+                  p.chat-messages__info تم الارسال منذ #{Math.ceil((Date.now() - message.sentAt) / (1000 * 60))} دقيقة بواسطة #{message.sender.name}
+              else
+                .chat-messages__message-wrapper.chat-messages__message-wrapper--other.flex
+                  li.chat-messages__message= message.body
+                  p.chat-messages__info تم الارسال منذ #{Math.ceil((Date.now() - message.sentAt) / (1000 * 60))} دقيقة بواسطة #{message.sender.name}
+          form.chat-message-box.flex
+            textarea(type="text" placeholder="اكتب رسالة").input-field.chat-message-box__field
+            button.emojies-btn(type="button") 😀
+            .emojies.flex
+              #smileys.category
+              .emojies-tab-buttons.flex
+                button.emoji-tab-button(data-tab="smileys" type="button") &#x1f603;
+                button.emoji-tab-button(data-tab="smileys" type="button") &#x1f43b;
             
-          
-          button.btn#chat-message-box__button(type="submit") ارسل
-      else
-        .flex.join-chat-form
-          input.input-field.join-chat-field(type="password" placeholder="باسورد الشات" title="سيبها فاضية لو الشات من غير باسورد")
-          p.join-chat-error الباسورد ده غلط. حاول تاني
-          button.btn.join-chat-btn اشترك في الشات
+            button.btn#chat-message-box__button(type="submit") ارسل
+        else
+          .flex.join-chat-form
+            input.input-field.join-chat-field(type="password" placeholder="باسورد الشات" title="سيبها فاضية لو الشات من غير باسورد")
+            p.join-chat-error الباسورد ده غلط. حاول تاني
+            button.btn.join-chat-btn اشترك في الشات
     
     include partials/footer
 
